@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Examination Registration &amp; Fee Management System - Danhiko Industrial Training College</title>
+  <meta name="description" content="Official Examination Registry &amp; Fee Management Portal for Danhiko Industrial Training College, Harare, Zimbabwe. Heritage-Based Education 5.0 modular assessments.">
+  <meta property="og:title" content="Examination Registration &amp; Fee Management System - Danhiko Industrial Training College">
+  <meta property="og:description" content="Official Examination Registry &amp; Fee Management Portal for Danhiko Industrial Training College in Harare, Zimbabwe.">
+  <meta property="og:type" content="website">
+  <!-- Pure CSS3 Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Accessibility Skip Link -->
+  <a href="#exam-registration-portal" class="skip-link">Skip to main content</a>
+
+  <!-- Top Institutional Government & Location Banner -->
+  <aside class="top-banner" aria-label="Institutional Affiliation">
+    <div class="container">
+      <div class="banner-ministry">
+        <span aria-hidden="true">🏛️</span>
+        <span>Ministry of Higher and Tertiary Education, Innovation, Science and Technology Development</span>
+      </div>
+      <div class="banner-location">
+        <span aria-hidden="true">📍</span>
+        <span>No 123, Mutare Road, Harare, Zimbabwe • Official Examinations Registry &amp; Bursar Portal</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Institutional Navigation Header for Portal -->
+  <header class="main-header" id="header">
+    <div class="container navbar">
+      <a href="portal.html" class="brand-logo" aria-label="Danhiko Industrial Training College Portal">
+        <div class="brand-emblem" aria-hidden="true">D</div>
+        <div class="brand-text">
+          <h1>DANHIKO INDUSTRIAL TRAINING COLLEGE</h1>
+          <p>Official Examination Registry • Heritage-Based Education 5.0 Assessments</p>
+        </div>
+      </a>
+
+      <!-- Mobile Menu Toggle Button -->
+      <button class="mobile-toggle" id="mobileNavToggle" aria-label="Toggle Navigation Menu" aria-expanded="false" aria-controls="navLinksMenu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+      <!-- Navigation Links -->
+      <nav aria-label="Portal Navigation">
+        <ul class="nav-links" id="navLinksMenu">
+          <li><a href="index.html" class="btn btn-secondary btn-sm" style="display: inline-flex; align-items: center; gap: 0.375rem; text-decoration: none; padding: 0.5rem 1rem;">← Return to College Website</a></li>
+          <li><a href="#exam-registration-portal" class="nav-link active" data-nav-tab="dashboard">Dashboard</a></li>
+          <li><a href="#exam-registration-portal" class="nav-link" data-nav-tab="admin">Admin Hub</a></li>
+          <li><a href="#exam-registration-portal" class="nav-link" data-nav-tab="students">Students</a></li>
+          <li><a href="#exam-registration-portal" class="nav-link" data-nav-tab="register">Registration</a></li>
+          <li><a href="#contact" class="nav-link">Registry Inquiries</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Portal Content -->
+  <main id="main-content">
+<section class="portal-wrapper" id="exam-registration-portal" aria-labelledby="portal-heading">
+      <div class="container">
+
+        <!-- Portal Header -->
+        <div class="portal-header">
+          <div class="portal-title-area">
+            <h2 id="portal-heading">
+              <span aria-hidden="true">📋</span>
+              <span>Examination Registration &amp; Fee Management System</span>
+            </h2>
+            <p>Official Examination Registry Portal • Heritage-Based Education 5.0 Assessments</p>
+          </div>
+          <div class="portal-quick-actions">
+            <button class="btn btn-accent btn-sm" onclick="openAddStudentModal()">+ Add Student</button>
+            <button class="btn btn-primary btn-sm" data-nav-tab="register">New Registration</button>
+            <button class="btn btn-secondary btn-sm" onclick="openAddSubjectModal()">+ Add Module</button>
+          </div>
+        </div>
+
+        <!-- Administrator Management & Session Bar -->
+        <div class="admin-session-bar" id="adminSessionBar">
+          <div class="admin-session-info">
+            <span class="admin-badge-icon" aria-hidden="true">🛡️</span>
+            <div>
+              <div class="admin-role-title">Examinations Registry &amp; Bursar Administration</div>
+              <div class="admin-user-name">
+                <span>Logged in as: <strong>Dr. S. Chikore</strong> (Senior Examinations Registrar)</span>
+                <span class="admin-role-pill" id="adminStatusPill">Admin Mode Active</span>
+              </div>
+            </div>
+          </div>
+          <div class="admin-session-actions">
+            <button class="btn btn-sm btn-outline-admin" id="toggleAdminViewBtn" onclick="toggleAdminMode()" title="Switch between full administrator management view and student candidate view">
+              👁️ <span id="toggleAdminViewText">Switch to Candidate View</span>
+            </button>
+            <button class="btn btn-sm btn-accent" onclick="openAddStudentModal()">
+              + Add Student
+            </button>
+            <button class="btn btn-sm btn-primary" onclick="switchSystemTab('register')">
+              New Registration
+            </button>
+            <button class="btn btn-sm btn-secondary" onclick="openAddSubjectModal()">
+              + Add Course Module
+            </button>
+            <button class="btn btn-sm btn-navy" onclick="switchSystemTab('admin')">
+              ⚙️ Admin Hub
+            </button>
+          </div>
+        </div>
+
+        <!-- Registration Deadline Alert Banner & Countdown -->
+        <div class="deadline-banner banner-normal" id="deadlineAlertBanner" role="alert">
+          <div class="banner-message">
+            <span class="status-icon" id="bannerStatusIcon" aria-hidden="true">⏱️</span>
+            <span id="bannerAlertMsg">
+              <strong>Active Registration Period:</strong> Open for all courses and semesters.
+            </span>
+          </div>
+          <div class="banner-countdown" aria-label="Countdown to Registration Deadline">
+            <div class="timer-box">
+              <div class="timer-num timer-days">00</div>
+              <div class="timer-label">Days</div>
+            </div>
+            <div class="timer-box">
+              <div class="timer-num timer-hours">00</div>
+              <div class="timer-label">Hours</div>
+            </div>
+            <div class="timer-box">
+              <div class="timer-num timer-minutes">00</div>
+              <div class="timer-label">Mins</div>
+            </div>
+            <div class="timer-box">
+              <div class="timer-num timer-seconds">00</div>
+              <div class="timer-label">Secs</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Registration System Navigation Tabs (9 Modules) -->
+        <nav class="system-nav-tabs" aria-label="Examination Portal Modules">
+          <button class="system-tab-btn active" data-tab="dashboard">
+            <span>📊</span> Dashboard
+          </button>
+          <button class="system-tab-btn" data-tab="admin" id="tabNavBtnAdmin">
+            <span>🛡️</span> Admin Management
+          </button>
+          <button class="system-tab-btn" data-tab="students">
+            <span>👥</span> Manage Students
+          </button>
+          <button class="system-tab-btn" data-tab="subjects">
+            <span>📚</span> Available Subjects
+          </button>
+          <button class="system-tab-btn" data-tab="register">
+            <span>✍️</span> Register for Exams
+          </button>
+          <button class="system-tab-btn" data-tab="registrations">
+            <span>📑</span> Registrations
+          </button>
+          <button class="system-tab-btn" data-tab="receipts">
+            <span>🧾</span> Fee Receipt
+          </button>
+          <button class="system-tab-btn" data-tab="reminders">
+            <span>⏰</span> Deadline &amp; Reminders
+          </button>
+          <button class="system-tab-btn" data-tab="reports">
+            <span>📈</span> Reports
+          </button>
+        </nav>
+
+        <!-- ====================================================================
+             TAB PANEL 1: DASHBOARD
+             ==================================================================== -->
+        <div class="tab-panel active" id="tab_dashboard" role="tabpanel">
+          <!-- KPI Stats Grid -->
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <div class="kpi-icon navy" aria-hidden="true">🎓</div>
+              <div class="kpi-info">
+                <h4>Total Students</h4>
+                <div class="kpi-value" id="kpiTotalStudents">0</div>
+                <div class="kpi-sub">Enrolled Candidates</div>
+              </div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-icon blue" aria-hidden="true">📖</div>
+              <div class="kpi-info">
+                <h4>Total Subjects</h4>
+                <div class="kpi-value" id="kpiTotalSubjects">0</div>
+                <div class="kpi-sub">ICT Curriculum Modules</div>
+              </div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-icon green" aria-hidden="true">✅</div>
+              <div class="kpi-info">
+                <h4>Registered Students</h4>
+                <div class="kpi-value" id="kpiRegisteredStudents">0</div>
+                <div class="kpi-sub">Active Submissions</div>
+              </div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-icon amber" aria-hidden="true">⏳</div>
+              <div class="kpi-info">
+                <h4>Not Registered</h4>
+                <div class="kpi-value" id="kpiNotRegisteredStudents">0</div>
+                <div class="kpi-sub">Pending Registration</div>
+              </div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-icon green" aria-hidden="true">💵</div>
+              <div class="kpi-info">
+                <h4>Total Revenue</h4>
+                <div class="kpi-value" id="kpiTotalRevenue">$0.00</div>
+                <div class="kpi-sub">Confirmed Fees Collected</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dashboard Summary Panels -->
+          <div class="dashboard-panels-grid">
+            <!-- Recent Registrations Preview -->
+            <div class="dash-panel">
+              <div class="dash-panel-header">
+                <h3><span>📑</span> Recent Exam Registrations</h3>
+                <button class="btn btn-secondary btn-sm" onclick="switchSystemTab('registrations')">View All</button>
+              </div>
+              <div class="table-container" style="box-shadow: none; border-radius: var(--radius-md);">
+                <table class="app-table">
+                  <thead>
+                    <tr>
+                      <th>Reg ID</th>
+                      <th>Candidate</th>
+                      <th>Semester</th>
+                      <th>Total Fee</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody id="dashRecentRegsBody">
+                    <!-- Populated by JavaScript -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Deadline Status & Quick Navigation Box -->
+            <div class="dash-panel">
+              <div class="dash-panel-header">
+                <h3><span>⏰</span> Registration Schedule</h3>
+                <button class="btn btn-secondary btn-sm" onclick="switchSystemTab('reminders')">Manage</button>
+              </div>
+              <div style="background: var(--surface-alt); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 1.25rem; margin-bottom: 1.25rem;">
+                <div style="font-size: 0.8125rem; font-weight: 700; color: var(--text-subtle); text-transform: uppercase; margin-bottom: 0.25rem;">Current Deadline</div>
+                <div class="deadline-display-text" style="font-size: 1.125rem; font-weight: 700; color: var(--primary);">Loading...</div>
+                <div style="margin-top: 1rem; display: flex; gap: 0.5rem; justify-content: center;">
+                  <div class="timer-box"><div class="timer-num timer-days">00</div><div class="timer-label">Days</div></div>
+                  <div class="timer-box"><div class="timer-num timer-hours">00</div><div class="timer-label">Hours</div></div>
+                  <div class="timer-box"><div class="timer-num timer-minutes">00</div><div class="timer-label">Mins</div></div>
+                  <div class="timer-box"><div class="timer-num timer-seconds">00</div><div class="timer-label">Secs</div></div>
+                </div>
+              </div>
+
+              <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                <button class="btn btn-primary" onclick="switchSystemTab('register')" style="width: 100%;">
+                  Register Student for Exams
+                </button>
+                <button class="btn btn-secondary" onclick="switchSystemTab('students')" style="width: 100%;">
+                  Manage Student Records
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ====================================================================
+             TAB PANEL: ADMIN MANAGEMENT HUB
+             ==================================================================== -->
+        <div class="tab-panel" id="tab_admin" role="tabpanel">
+          <!-- Admin Status & Key Metrics -->
+          <div class="admin-hub-grid">
+            <div class="admin-card">
+              <div class="admin-card-header">
+                <h3><span>🛡️</span> Institutional Registry Authority</h3>
+                <span class="admin-role-pill" id="adminHubStatusPill">Admin Master Active</span>
+              </div>
+              <p style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 0.75rem;">
+                Official examination registry authority for Heritage-Based Education 5.0 vocational assessments across all four training departments.
+              </p>
+              <div style="font-size: 0.8125rem; color: var(--text-subtle);">
+                Active Registrar: <strong>Dr. S. Chikore</strong> • Session: <strong id="adminSessionLabel">Nov 2026 National Diet</strong>
+              </div>
+            </div>
+
+            <div class="admin-card">
+              <div class="admin-card-header">
+                <h3><span>💰</span> Bursar Fee Structure</h3>
+                <span class="badge badge-success">Active Tariff</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; font-size: 0.875rem; padding: 0.375rem 0; border-bottom: 1px dashed var(--border);">
+                <span>Institutional Processing Fee:</span>
+                <strong id="adminDispProcessingFee">$5.00</strong>
+              </div>
+              <div style="display: flex; justify-content: space-between; font-size: 0.875rem; padding: 0.375rem 0; border-bottom: 1px dashed var(--border);">
+                <span>Late Registration Penalty:</span>
+                <strong id="adminDispLateFee">$10.00</strong>
+              </div>
+              <div style="display: flex; justify-content: space-between; font-size: 0.875rem; padding: 0.375rem 0;">
+                <span>Total Bursar Revenue:</span>
+                <strong style="color: var(--success);" id="adminDispRevenue">$0.00</strong>
+              </div>
+            </div>
+
+            <div class="admin-card">
+              <div class="admin-card-header">
+                <h3><span>⚡</span> Master Admin Actions</h3>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                <button class="btn btn-accent btn-sm" onclick="openAddStudentModal()">+ Add Student</button>
+                <button class="btn btn-primary btn-sm" onclick="switchSystemTab('register')">New Registration</button>
+                <button class="btn btn-secondary btn-sm" onclick="openAddSubjectModal()">+ Add Course Module</button>
+                <button class="btn btn-navy btn-sm" onclick="exportFullRegistryCSV()">📥 Export Complete Registry (CSV)</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Administration Section 1: Course & Module Management -->
+          <div class="card" style="margin-bottom: 1.5rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
+              <div>
+                <h3 style="font-size: 1.125rem; color: var(--primary); font-weight: 700;">
+                  <span>📚</span> Manage Curriculum Modules for All Courses
+                </h3>
+                <p style="font-size: 0.8125rem; color: var(--text-muted);">
+                  Add curriculum units, adjust fees, and configure theory vs practical psychomotor assessment modes.
+                </p>
+              </div>
+              <button class="btn btn-primary" onclick="openAddSubjectModal()">+ Add Course Module</button>
+            </div>
+
+            <div class="admin-filter-bar">
+              <select id="adminModuleCourseFilter" class="form-control" style="width: auto;">
+                <option value="ALL">All Vocational Courses</option>
+                <option value="Information Technology (ICT)">Information Technology (ICT)</option>
+                <option value="Clothing Design & Textile Technology">Clothing Design &amp; Textile Technology</option>
+                <option value="Electrical Installation, Maintenance & Repair">Electrical Installation, Maintenance &amp; Repair</option>
+                <option value="Wood Technology / Furniture & Cabinet Making">Wood Technology / Furniture &amp; Cabinet Making</option>
+                <option value="All Courses">Common Institutional Modules</option>
+              </select>
+
+              <select id="adminModuleSemesterFilter" class="form-control" style="width: auto;">
+                <option value="ALL">All Semesters</option>
+                <option value="1">Semester 1</option>
+                <option value="2">Semester 2</option>
+                <option value="3">Semester 3</option>
+                <option value="4">Semester 4</option>
+              </select>
+
+              <input type="text" id="adminModuleSearch" class="form-control" placeholder="Search module code or title..." style="flex: 1; min-width: 200px;">
+            </div>
+
+            <div class="table-container" style="max-height: 440px; overflow-y: auto;">
+              <table class="app-table">
+                <thead>
+                  <tr>
+                    <th>Unit Code</th>
+                    <th>Module Title</th>
+                    <th>Discipline / Course</th>
+                    <th>Semester</th>
+                    <th>Assessment Type</th>
+                    <th>Exam Fee</th>
+                    <th>Admin Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="adminModulesTableBody">
+                  <!-- Populated by JavaScript -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Administration Section 2: Registrations Control & Status Verification -->
+          <div class="card" style="margin-bottom: 1.5rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
+              <div>
+                <h3 style="font-size: 1.125rem; color: var(--primary); font-weight: 700;">
+                  <span>📑</span> Candidate Registrations &amp; Bursar Payment Status
+                </h3>
+                <p style="font-size: 0.8125rem; color: var(--text-muted);">
+                  Examinations Officer authority to verify candidate submissions, approve confirmed payment, or adjust registration records.
+                </p>
+              </div>
+              <div style="display: flex; gap: 0.5rem;">
+                <button class="btn btn-secondary btn-sm" onclick="exportRegistrationsCSV()">Export Registrations CSV</button>
+                <button class="btn btn-accent btn-sm" onclick="switchSystemTab('register')">New Registration</button>
+              </div>
+            </div>
+
+            <div class="table-container">
+              <table class="app-table">
+                <thead>
+                  <tr>
+                    <th>Reg ID</th>
+                    <th>Candidate</th>
+                    <th>Course &amp; Sem</th>
+                    <th>Subjects</th>
+                    <th>Fee Payable</th>
+                    <th>Status</th>
+                    <th>Admin Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="adminRegistrationsTableBody">
+                  <!-- Populated by JavaScript -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Administration Section 3: Registry Settings & Audit Trail -->
+          <div class="dashboard-panels-grid">
+            <div class="dash-panel">
+              <div class="dash-panel-header">
+                <h3><span>⚙️</span> Institutional Registry Settings</h3>
+              </div>
+              <form id="adminSettingsForm" style="display: flex; flex-direction: column; gap: 0.875rem;">
+                <div class="form-group">
+                  <label class="form-label" for="settingSessionName">Examination Diet Name</label>
+                  <input type="text" id="settingSessionName" class="form-control" value="November 2026 National Examinations" required>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+                  <div class="form-group">
+                    <label class="form-label" for="settingProcessingFee">Processing Fee ($)</label>
+                    <input type="number" id="settingProcessingFee" class="form-control" step="0.50" min="0" value="5.00" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="settingLateFee">Late Surcharge ($)</label>
+                    <input type="number" id="settingLateFee" class="form-control" step="1.00" min="0" value="10.00" required>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="settingDeadlineDate">Registration Cut-off Deadline</label>
+                  <input type="datetime-local" id="settingDeadlineDate" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="align-self: flex-start;">Update Institutional Policies</button>
+              </form>
+            </div>
+
+            <div class="dash-panel">
+              <div class="dash-panel-header">
+                <h3><span>📜</span> Administrator Audit Trail</h3>
+                <button class="btn btn-secondary btn-sm" onclick="clearAuditTrail()">Clear</button>
+              </div>
+              <ul class="admin-audit-list" id="adminAuditTrailList">
+                <!-- Populated dynamically by JavaScript -->
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- ====================================================================
+             TAB PANEL 3: MANAGE STUDENTS
+             ==================================================================== -->
+        <div class="tab-panel" id="tab_students" role="tabpanel">
+          <div class="table-toolbar">
+            <div class="table-search-group">
+              <input type="text" id="studentSearchInput" class="form-control" placeholder="Search by ID, student name, course or email...">
+            </div>
+            <div class="table-filter-group">
+              <select id="studentCourseFilter" class="form-control" style="width: auto;">
+                <option value="ALL">All Vocational Courses</option>
+                <option value="Information Technology (ICT)">Information Technology (ICT)</option>
+                <option value="Clothing Design & Textile Technology">Clothing Design &amp; Textile Technology</option>
+                <option value="Electrical Installation, Maintenance & Repair">Electrical Installation, Maintenance &amp; Repair</option>
+                <option value="Wood Technology / Furniture & Cabinet Making">Wood Technology / Furniture &amp; Cabinet Making</option>
+              </select>
+              <select id="studentSemesterFilter" class="form-control" style="width: auto;">
+                <option value="ALL">All Semesters</option>
+                <option value="1">Semester 1</option>
+                <option value="2">Semester 2</option>
+                <option value="3">Semester 3</option>
+                <option value="4">Semester 4</option>
+              </select>
+              <button class="btn btn-primary" onclick="openAddStudentModal()">+ Add New Student</button>
+            </div>
+          </div>
+          <div class="table-container">
+            <table class="app-table">
+              <thead>
+                <tr>
+                  <th>Student ID</th>
+                  <th>Full Name</th>
+                  <th>Course</th>
+                  <th>Semester</th>
+                  <th>Inclusive Support</th>
+                  <th>Email</th>
+                  <th>Registration Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="studentsTableBody">
+                <!-- Populated dynamically by JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- ====================================================================
+             TAB PANEL 4: AVAILABLE SUBJECTS
+             ==================================================================== -->
+        <div class="tab-panel" id="tab_subjects" role="tabpanel">
+          <div class="admin-filter-bar" style="margin-bottom: 1.25rem;">
+            <select id="subjectCourseFilter" class="form-control" style="width: auto; min-width: 240px;">
+              <option value="ALL">All Vocational Courses</option>
+              <option value="Information Technology (ICT)">Information Technology (ICT)</option>
+              <option value="Clothing Design & Textile Technology">Clothing Design &amp; Textile Technology</option>
+              <option value="Electrical Installation, Maintenance & Repair">Electrical Installation, Maintenance &amp; Repair</option>
+              <option value="Wood Technology / Furniture & Cabinet Making">Wood Technology / Furniture &amp; Cabinet Making</option>
+              <option value="All Courses">Common Institutional Modules</option>
+            </select>
+
+            <div class="subjects-filter-tabs" style="margin-bottom: 0;">
+              <button class="subject-filter-btn active" data-semester="ALL">All Semesters</button>
+              <button class="subject-filter-btn" data-semester="1">Sem 1</button>
+              <button class="subject-filter-btn" data-semester="2">Sem 2</button>
+              <button class="subject-filter-btn" data-semester="3">Sem 3</button>
+              <button class="subject-filter-btn" data-semester="4">Sem 4</button>
+            </div>
+
+            <button class="btn btn-primary btn-sm" onclick="openAddSubjectModal()" style="margin-left: auto;">+ Add Course Module</button>
+          </div>
+
+          <div id="subjectsListContainer">
+            <!-- Populated dynamically by JavaScript -->
+          </div>
+        </div>
+
+        <!-- ====================================================================
+             TAB PANEL 4: REGISTER FOR EXAMS
+             ==================================================================== -->
+        <div class="tab-panel" id="tab_register" role="tabpanel">
+          <div class="registration-form-container">
+            <!-- Left Column: Form Controls -->
+            <div class="reg-form-card">
+              <h3 style="font-size: 1.25rem; color: var(--primary); margin-bottom: 0.5rem; font-weight: 700;">
+                Candidate Examination Entry Form
+              </h3>
+              <p style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 1.5rem;">
+                Select an enrolled candidate to automatically filter the available subjects for their assigned semester.
+              </p>
+
+              <!-- Step 1: Select Student -->
+              <div class="form-group">
+                <label for="regStudentSelect" class="form-label">
+                  Select Enrolled Candidate <span class="req">*</span>
+                </label>
+                <select id="regStudentSelect" class="form-control">
+                  <option value="">-- Choose Student by ID or Name --</option>
+                  <!-- Populated by JavaScript -->
+                </select>
+                <div class="form-help">Only registered college candidates are eligible for examination entry.</div>
+              </div>
+
+              <!-- Step 2: Auto-Detected Student Details Card -->
+              <div class="student-lookup-info" id="selectedStudentInfo">
+                <h4 style="font-size: 0.9375rem; font-weight: 700; color: var(--primary); margin-bottom: 0.75rem;">
+                  Candidate Profile Details
+                </h4>
+                <div class="student-info-grid">
+                  <div>
+                    <strong>Full Name</strong>
+                    <span id="dispStudentName">-</span>
+                  </div>
+                  <div>
+                    <strong>Student ID</strong>
+                    <span id="dispStudentID">-</span>
+                  </div>
+                  <div>
+                    <strong>Course</strong>
+                    <span id="dispStudentCourse">-</span>
+                  </div>
+                  <div>
+                    <strong>Assigned Semester</strong>
+                    <span id="dispStudentSemester" style="font-weight: 700; color: var(--secondary);">-</span>
+                  </div>
+                  <div style="grid-column: span 2;">
+                    <strong>Email Address</strong>
+                    <span id="dispStudentEmail">-</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Step 3: Semester Subjects Multi-Select -->
+              <div class="form-group">
+                <label class="form-label">
+                  Select Examination Subjects for Candidate <span class="req">*</span>
+                </label>
+                <div id="regSubjectsCheckboxes" class="subject-selection-list">
+                  <p style="color: var(--text-subtle); padding: 1rem 0;">Please select a candidate above to load their semester subjects.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Column: Live Fee Calculation & Confirmation Summary -->
+            <div class="reg-summary-card">
+              <h3 style="font-size: 1.25rem; color: var(--primary); margin-bottom: 0.5rem; font-weight: 700;">
+                Fee Calculation Summary
+              </h3>
+              <p style="font-size: 0.875rem; color: var(--text-muted);">
+                Fees are dynamically computed with standard institutional processing.
+              </p>
+
+              <div id="regSummaryContent">
+                <p style="color: var(--text-subtle); padding: 1.5rem 0; text-align: center;">
+                  Select candidate and examination subjects to calculate fees.
+                </p>
+              </div>
+
+              <div style="margin-top: 1.75rem;">
+                <button type="button" id="proceedToConfirmBtn" class="btn btn-accent btn-lg" style="width: 100%;" disabled>
+                  Review &amp; Confirm Registration
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ====================================================================
+             TAB PANEL 5: REGISTRATIONS MANAGEMENT
+             ==================================================================== -->
+        <div class="tab-panel" id="tab_registrations" role="tabpanel">
+          <div class="table-toolbar">
+            <div class="table-search-group">
+              <input type="text" id="regSearchInput" class="form-control" placeholder="Search by Registration ID, candidate name or student ID...">
+            </div>
+            <div class="table-filter-group">
+              <select id="regStatusFilter" class="form-control" style="width: auto;">
+                <option value="ALL">All Statuses</option>
+                <option value="Confirmed">Confirmed</option>
+                <option value="Pending">Pending</option>
+                <option value="Cancelled">Cancelled</option>
+              </select>
+              <button class="btn btn-primary" onclick="switchSystemTab('register')">+ New Registration</button>
+            </div>
+          </div>
+          <div class="table-container">
+            <table class="app-table">
+              <thead>
+                <tr>
+                  <th>Registration ID</th>
+                  <th>Candidate</th>
+                  <th>Curriculum Subjects</th>
+                  <th>Date</th>
+                  <th>Status</th>
+                  <th>Total Fee</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="registrationsTableBody">
+                <!-- Populated dynamically by JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- ====================================================================
+             TAB PANEL 6: FEE RECEIPT
+             ==================================================================== -->
+        <div class="tab-panel" id="tab_receipts" role="tabpanel">
+          <div style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.5rem 1.75rem; margin-bottom: 1.5rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+              <div style="flex-grow: 1; max-width: 500px;">
+                <label for="receiptSelectorDropdown" class="form-label" style="font-weight: 700; color: var(--primary);">
+                  Select Candidate Registration Receipt
+                </label>
+                <select id="receiptSelectorDropdown" class="form-control">
+                  <!-- Populated by JavaScript -->
+                </select>
+              </div>
+              <div style="display: flex; gap: 0.5rem; align-items: flex-end;">
+                <button class="btn btn-primary" onclick="printReceipt()">🖨️ Print Receipt</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Printable Receipt Frame -->
+          <div class="receipt-wrapper" id="primaryReceiptFrame">
+            <div class="receipt-header">
+              <div class="receipt-institution">DANHIKO INDUSTRIAL TRAINING COLLEGE</div>
+              <div class="receipt-title">EXAM REGISTRATION FEE RECEIPT</div>
+              <div class="receipt-location">No 123, Mutare Road, Harare, Zimbabwe • Ministry of Higher &amp; Tertiary Education</div>
+            </div>
+
+            <div class="receipt-meta-grid">
+              <div>
+                <strong>Receipt Number</strong>
+                <span id="receiptNum">REC-2026-0001</span>
+              </div>
+              <div>
+                <strong>Registration ID</strong>
+                <span id="receiptRegId" style="font-family: var(--font-mono); font-weight: 700;">REG20260912101500</span>
+              </div>
+              <div>
+                <strong>Issue Date</strong>
+                <span id="receiptDate">2026-09-12</span>
+              </div>
+              <div>
+                <strong>Official Status</strong>
+                <span id="receiptStatusBadge" class="badge badge-success">CONFIRMED</span>
+              </div>
+              <div>
+                <strong>Candidate Name</strong>
+                <span id="receiptStudentName">John Doe</span>
+              </div>
+              <div>
+                <strong>Candidate ID</strong>
+                <span id="receiptStudentID">D001</span>
+              </div>
+              <div>
+                <strong>Course Curriculum</strong>
+                <span id="receiptCourse">Information Technology (ICT)</span>
+              </div>
+              <div>
+                <strong>Curriculum Semester</strong>
+                <span id="receiptSemester">Semester 1</span>
+              </div>
+            </div>
+
+            <table class="receipt-table">
+              <thead>
+                <tr>
+                  <th>Subject Code</th>
+                  <th>Description / Module Title</th>
+                  <th>Assessment Type</th>
+                  <th style="text-align: right;">Fee (USD)</th>
+                </tr>
+              </thead>
+              <tbody id="receiptTableBody">
+                <!-- Populated dynamically -->
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="3" style="text-align: right;">Subject Modules Subtotal:</td>
+                  <td style="text-align: right;" id="receiptSubtotal">$0.00</td>
+                </tr>
+                <tr>
+                  <td colspan="3" style="text-align: right;">Institutional Examination Processing Fee:</td>
+                  <td style="text-align: right;" id="receiptProcessingFee">$5.00</td>
+                </tr>
+                <tr>
+                  <td colspan="3" style="text-align: right; font-size: 1.125rem;">Total Amount Paid:</td>
+                  <td style="text-align: right;" class="receipt-total-highlight" id="receiptTotalFee">$0.00</td>
+                </tr>
+              </tfoot>
+            </table>
+
+            <div class="receipt-footer-stamp">
+              <div>
+                <p>This document is an authentic electronic record issued under Danhiko College Regulations.</p>
+                <p style="margin-top: 0.25rem;">Valid only upon confirmed endorsement by the Examinations Bursar.</p>
+              </div>
+              <div class="stamp-box">
+                DANHIKO BURSAR<br>OFFICIAL STAMP
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ====================================================================
+             TAB PANEL 7: DEADLINE & EMAIL REMINDERS
+             ==================================================================== -->
+        <div class="tab-panel" id="tab_reminders" role="tabpanel">
+          <div class="dashboard-panels-grid">
+            <!-- Deadline Management Form -->
+            <div class="dash-panel">
+              <div class="dash-panel-header">
+                <h3><span>⏱️</span> Deadline Configuration</h3>
+              </div>
+              <form id="deadlineForm">
+                <div class="form-group">
+                  <label for="deadlineDatetimeInput" class="form-label">
+                    Set Examination Registration Deadline <span class="req">*</span>
+                  </label>
+                  <input type="datetime-local" id="deadlineDatetimeInput" class="form-control" required>
+                  <div class="form-help">Setting this date updates the system countdown across the entire college site.</div>
+                </div>
+                <button type="submit" class="btn btn-primary" style="margin-bottom: 1.5rem;">
+                  Save &amp; Broadcast New Deadline
+                </button>
+              </form>
+
+              <div style="background: var(--surface-alt); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 1.25rem;">
+                <h4 style="font-size: 0.9375rem; color: var(--primary); margin-bottom: 0.5rem; font-weight: 700;">Automatic Notification Rules</h4>
+                <ul style="padding-left: 1.25rem; font-size: 0.8125rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 0.375rem;">
+                  <li><strong>> 7 Days Remaining:</strong> Standard active status banner.</li>
+                  <li><strong>&le; 7 Days Remaining:</strong> Yellow warning: <em>Reminder: Exam registration closes soon.</em></li>
+                  <li><strong>&le; 3 Days Remaining:</strong> Red pulsing alert: <em>URGENT: Exam registration closes soon!</em></li>
+                  <li><strong>Deadline Passed:</strong> <em>REGISTRATION CLOSED</em> – All new exam registrations automatically disabled.</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Simulated Email Reminders Notification System -->
+            <div class="dash-panel">
+              <div class="dash-panel-header">
+                <h3><span>✉️</span> Automated Email Reminder Simulator</h3>
+              </div>
+              <p style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 1rem;">
+                Simulate dispatching urgent registration reminders to candidates with pending examination submissions.
+              </p>
+
+              <div class="form-group">
+                <label for="emailStudentSelect" class="form-label">Target Unregistered Candidate</label>
+                <select id="emailStudentSelect" class="form-control">
+                  <!-- Populated by JavaScript with unregistered students -->
+                </select>
+              </div>
+
+              <!-- Email Preview Client Box -->
+              <div class="email-client-box">
+                <div class="email-client-header">
+                  <div class="email-field">
+                    <strong>To:</strong> <span id="emailPreviewTo">Loading...</span>
+                  </div>
+                  <div class="email-field">
+                    <strong>Subject:</strong> <span id="emailPreviewSubject" class="email-subject-line">URGENT – Exam Registration Closing Soon</span>
+                  </div>
+                  <div class="email-field">
+                    <strong>From:</strong> <span>registry@danhiko.ac.zw (Danhiko College)</span>
+                  </div>
+                </div>
+                <div class="email-body-content" id="emailPreviewBody">
+                  <!-- Generated by JavaScript -->
+                </div>
+              </div>
+
+              <div style="display: flex; gap: 0.75rem; margin-top: 1.25rem; flex-wrap: wrap;">
+                <button type="button" id="btnSendSingleReminder" class="btn btn-secondary btn-sm">
+                  Simulate Sending to Selected Candidate
+                </button>
+                <button type="button" id="btnSendAllReminders" class="btn btn-accent btn-sm">
+                  Send Reminder to All Unregistered Candidates
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ====================================================================
+             TAB PANEL 8: REPORTS & EXPORTS
+             ==================================================================== -->
+        <div class="tab-panel" id="tab_reports" role="tabpanel">
+          <div class="table-toolbar">
+            <div>
+              <h3 style="font-size: 1.125rem; font-weight: 700; color: var(--primary);">
+                Comprehensive Examination Registry Reports
+              </h3>
+              <p style="font-size: 0.8125rem; color: var(--text-subtle);">
+                Dynamic statistical summary across all course cohorts and semesters.
+              </p>
+            </div>
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+              <button class="btn btn-secondary" onclick="generateReport()">🔄 Refresh Statistics</button>
+              <button class="btn btn-secondary" id="btnPrintReport">🖨️ Print Report</button>
+              <button class="btn btn-primary" id="btnExportCsv">📥 Export CSV</button>
+            </div>
+          </div>
+
+          <!-- Dynamic Statistics Grid -->
+          <div class="kpi-grid" style="margin-top: 1.5rem;">
+            <div class="kpi-card">
+              <div class="kpi-icon navy">🎓</div>
+              <div class="kpi-info">
+                <h4>Total Students</h4>
+                <div class="kpi-value" id="repTotalStudents">0</div>
+              </div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-icon green">✅</div>
+              <div class="kpi-info">
+                <h4>Registered Students</h4>
+                <div class="kpi-value" id="repRegistered">0</div>
+              </div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-icon amber">⏳</div>
+              <div class="kpi-info">
+                <h4>Not Registered</h4>
+                <div class="kpi-value" id="repNotRegistered">0</div>
+              </div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-icon blue">📜</div>
+              <div class="kpi-info">
+                <h4>Confirmed Regs</h4>
+                <div class="kpi-value" id="repConfirmed">0</div>
+              </div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-icon red">🛑</div>
+              <div class="kpi-info">
+                <h4>Cancelled Regs</h4>
+                <div class="kpi-value" id="repCancelled">0</div>
+              </div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-icon green">💵</div>
+              <div class="kpi-info">
+                <h4>Total Revenue</h4>
+                <div class="kpi-value" id="repRevenue">$0.00</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Detailed Registration Table -->
+          <div class="table-container">
+            <table class="app-table">
+              <thead>
+                <tr>
+                  <th>Reg ID</th>
+                  <th>Student Name &amp; ID</th>
+                  <th>Semester</th>
+                  <th>Total Modules</th>
+                  <th>Modules Fee</th>
+                  <th>Processing Fee</th>
+                  <th>Grand Total</th>
+                </tr>
+              </thead>
+              <tbody id="reportTableBody">
+                <!-- Populated dynamically by JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+<section class="contact-section" id="contact" aria-labelledby="contact-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Inquiries &amp; Admissions</span>
+          <h2 class="section-title" id="contact-heading">Contact Danhiko Industrial Training College</h2>
+          <p class="section-description">
+            Connect with our administrative registry, admissions department, or disability resource coordinators.
+          </p>
+        </div>
+
+        <div class="contact-grid">
+          <!-- Institutional Information -->
+          <div class="contact-info">
+            <div>
+              <h3>Danhiko Industrial Training College</h3>
+              <p>
+                Operating under the Danhiko Project welfare organization. Dedicated to inclusive vocational, technical, and industrial rehabilitation training.
+              </p>
+              <div class="contact-details">
+                <div class="contact-block">
+                  <div class="contact-icon" aria-hidden="true">📍</div>
+                  <div>
+                    <h5>Campus Physical Address</h5>
+                    <address>
+                      No 123, Mutare Road<br>
+                      Harare, Zimbabwe
+                    </address>
+                  </div>
+                </div>
+                <div class="contact-block">
+                  <div class="contact-icon" aria-hidden="true">🏛️</div>
+                  <div>
+                    <h5>Governing Ministry</h5>
+                    <p>Ministry of Higher and Tertiary Education, Innovation, Science and Technology Development</p>
+                  </div>
+                </div>
+                <div class="contact-block">
+                  <div class="contact-icon" aria-hidden="true">♿</div>
+                  <div>
+                    <h5>Campus Accessibility</h5>
+                    <p>Wheelchair accessible entrances, ramps, adapted restrooms and parking bays available at No 123 Mutare Road.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="margin-top: 2rem; font-size: 0.8125rem; color: #94a3b8;">
+              Registry Hours: Monday – Friday, 08:00 to 16:30 CAT
+            </div>
+          </div>
+
+          <!-- Interactive Contact Form -->
+          <div class="contact-form-card">
+            <h3>Send Institutional Inquiry</h3>
+            <p>Please enter your message below for admissions or registry assistance.</p>
+            <form id="institutionalContactForm">
+              <div class="form-group">
+                <label for="contactFullName" class="form-label">Full Name <span class="req">*</span></label>
+                <input type="text" id="contactFullName" class="form-control" placeholder="e.g. Tendai Chikore" required>
+              </div>
+              <div class="form-group">
+                <label for="contactEmail" class="form-label">Email Address <span class="req">*</span></label>
+                <input type="email" id="contactEmail" class="form-control" placeholder="name@example.com" required>
+              </div>
+              <div class="form-group">
+                <label for="contactSubject" class="form-label">Inquiry Area</label>
+                <select id="contactSubject" class="form-control">
+                  <option value="exams">Examination Registration &amp; Assessment</option>
+                  <option value="admissions">Course Admissions &amp; Qualifications</option>
+                  <option value="accessibility">Disability Support &amp; Accessibility</option>
+                  <option value="general">General Institutional Inquiry</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="contactMessage" class="form-label">Message Details <span class="req">*</span></label>
+                <textarea id="contactMessage" class="form-control" rows="4" placeholder="How can we assist you with our vocational programs or exam registry?" required></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">Submit Inquiry</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================================================
+       MODALS & DIALOGS
+       ========================================================================== -->
+<!-- 1. Add/Edit Student Modal -->
+  <div class="modal-backdrop" id="studentModal" role="dialog" aria-modal="true" aria-labelledby="studentModalTitle" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 id="studentModalTitle">Add New Student</h3>
+        <button type="button" class="modal-close-btn" onclick="closeModal('studentModal')" aria-label="Close modal">&times;</button>
+      </div>
+      <form id="studentForm">
+        <div class="modal-body">
+          <input type="hidden" id="studentFormMode" value="add">
+          <input type="hidden" id="studentFormId" value="">
+
+          <div class="form-group">
+            <label for="stdInputId" class="form-label">Student ID <span class="req">*</span></label>
+            <input type="text" id="stdInputId" class="form-control" placeholder="e.g. D005" required>
+            <div class="form-help">Must be a unique candidate identifier.</div>
+          </div>
+
+          <div class="form-group">
+            <label for="stdInputName" class="form-label">Full Name <span class="req">*</span></label>
+            <input type="text" id="stdInputName" class="form-control" placeholder="e.g. Tinashe Ncube" required>
+          </div>
+
+          <div class="form-group">
+            <label for="stdInputCourse" class="form-label">Vocational Course <span class="req">*</span></label>
+            <select id="stdInputCourse" class="form-control" required>
+              <option value="Information Technology (ICT)">Information Technology (ICT)</option>
+              <option value="Clothing Design & Textile Technology">Clothing Design &amp; Textile Technology</option>
+              <option value="Electrical Installation, Maintenance & Repair">Electrical Installation, Maintenance &amp; Repair</option>
+              <option value="Wood Technology / Furniture & Cabinet Making">Wood Technology / Furniture &amp; Cabinet Making</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="stdInputSemester" class="form-label">Semester Level <span class="req">*</span></label>
+            <select id="stdInputSemester" class="form-control" required>
+              <option value="1">Semester 1</option>
+              <option value="2">Semester 2</option>
+              <option value="3">Semester 3</option>
+              <option value="4">Semester 4</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="stdInputAccommodation" class="form-label">Inclusive Education &amp; Disability Accommodation</label>
+            <select id="stdInputAccommodation" class="form-control">
+              <option value="Standard (None Required)">Standard (None Required)</option>
+              <option value="Wheelchair Accessible Workstation">Wheelchair Accessible Workstation</option>
+              <option value="Large Print Assessment Papers">Large Print Assessment Papers</option>
+              <option value="Sign Language Interpreter Support">Sign Language Interpreter Support</option>
+              <option value="Braille Format Papers">Braille Format Papers</option>
+              <option value="25% Extra Examination Time">25% Extra Examination Time</option>
+            </select>
+            <div class="form-help">Danhiko disability mainstreaming &amp; inclusive assessment requirement.</div>
+          </div>
+
+          <div class="form-group">
+            <label for="stdInputEmail" class="form-label">Email Address <span class="req">*</span></label>
+            <input type="email" id="stdInputEmail" class="form-control" placeholder="tinashe@example.com" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="closeModal('studentModal')">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Student Record</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Add New Course Module -->
+  <div class="modal-backdrop" id="addSubjectModal" role="dialog" aria-modal="true" aria-labelledby="addSubjectModalTitle" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 id="addSubjectModalTitle">Add Course Curriculum Module</h3>
+        <button type="button" class="modal-close-btn" onclick="closeModal('addSubjectModal')" aria-label="Close modal">&times;</button>
+      </div>
+      <form id="addSubjectForm">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="subInputCourse" class="form-label">Vocational Course Discipline <span class="req">*</span></label>
+            <select id="subInputCourse" class="form-control" required>
+              <option value="Information Technology (ICT)">Information Technology (ICT)</option>
+              <option value="Clothing Design & Textile Technology">Clothing Design &amp; Textile Technology</option>
+              <option value="Electrical Installation, Maintenance & Repair">Electrical Installation, Maintenance &amp; Repair</option>
+              <option value="Wood Technology / Furniture & Cabinet Making">Wood Technology / Furniture &amp; Cabinet Making</option>
+              <option value="All Courses">All Courses (Institutional Common Core)</option>
+            </select>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+            <div class="form-group">
+              <label for="subInputCode" class="form-label">Module Code <span class="req">*</span></label>
+              <input type="text" id="subInputCode" class="form-control" placeholder="e.g. CDTT205" required>
+            </div>
+            <div class="form-group">
+              <label for="subInputSemester" class="form-label">Semester Level <span class="req">*</span></label>
+              <select id="subInputSemester" class="form-control" required>
+                <option value="1">Semester 1</option>
+                <option value="2">Semester 2</option>
+                <option value="3">Semester 3</option>
+                <option value="4">Semester 4</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="subInputName" class="form-label">Module Title <span class="req">*</span></label>
+            <input type="text" id="subInputName" class="form-control" placeholder="e.g. Garment Pattern Drafting &amp; Tailoring" required>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+            <div class="form-group">
+              <label for="subInputAssessment" class="form-label">Assessment Mode <span class="req">*</span></label>
+              <select id="subInputAssessment" class="form-control" required>
+                <option value="Practical Workshop Assessment">Practical Workshop Assessment</option>
+                <option value="Written & Theory Examination">Written &amp; Theory Examination</option>
+                <option value="Psychomotor & Industrial Project">Psychomotor &amp; Industrial Project</option>
+                <option value="Portfolio & Defense">Portfolio &amp; Defense</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="subInputFee" class="form-label">Examination Fee ($ USD) <span class="req">*</span></label>
+              <input type="number" id="subInputFee" class="form-control" step="0.50" min="5" value="20.00" required>
+            </div>
+          </div>
+
+          <div class="form-group" style="display: flex; align-items: center; gap: 0.5rem; margin-top: 0.5rem;">
+            <input type="checkbox" id="subInputElective">
+            <label for="subInputElective" style="font-size: 0.875rem; cursor: pointer;">This is an Elective module (optional elective paper)</label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="closeModal('addSubjectModal')">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Module to Catalog</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Edit Module Fee -->
+  <div class="modal-backdrop" id="editFeeModal" role="dialog" aria-modal="true" aria-labelledby="editFeeModalTitle" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 id="editFeeModalTitle">Adjust Examination Module Fee</h3>
+        <button type="button" class="modal-close-btn" onclick="closeModal('editFeeModal')" aria-label="Close modal">&times;</button>
+      </div>
+      <form id="editFeeForm">
+        <div class="modal-body">
+          <input type="hidden" id="editFeeSubjectId" value="">
+          <p id="editFeeSubjectTitle" style="font-weight: 700; color: var(--primary); margin-bottom: 1rem;"></p>
+          <div class="form-group">
+            <label for="editFeeNewAmount" class="form-label">Approved Examination Fee ($ USD) <span class="req">*</span></label>
+            <input type="number" id="editFeeNewAmount" class="form-control" step="0.50" min="1" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="closeModal('editFeeModal')">Cancel</button>
+          <button type="submit" class="btn btn-primary">Update Fee</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 2. Registration Confirmation Modal -->
+  <div class="modal-backdrop" id="confirmationModal" role="dialog" aria-modal="true" aria-labelledby="confirmationModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-header">
+        <h3 id="confirmationModalTitle">Confirm Examination Registration</h3>
+        <button type="button" class="modal-close-btn" onclick="closeModal('confirmationModal')" aria-label="Close modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size: 0.9375rem; color: var(--text-muted); margin-bottom: 1.25rem;">
+          Please review the candidate's selected curriculum examination modules and associated fees before confirming entry into the college registry.
+        </p>
+
+        <div class="receipt-meta-grid" style="margin-bottom: 1.25rem;">
+          <div>
+            <strong>Registration ID</strong>
+            <span id="confRegId" style="font-family: var(--font-mono); font-weight: 700; color: var(--primary);">-</span>
+          </div>
+          <div>
+            <strong>Registration Date</strong>
+            <span id="confDate">-</span>
+          </div>
+          <div>
+            <strong>Candidate Name</strong>
+            <span id="confStudentName">-</span>
+          </div>
+          <div>
+            <strong>Student ID</strong>
+            <span id="confStudentID">-</span>
+          </div>
+          <div>
+            <strong>Course Curriculum</strong>
+            <span id="confCourse">-</span>
+          </div>
+          <div>
+            <strong>Assigned Semester</strong>
+            <span id="confSemester">-</span>
+          </div>
+        </div>
+
+        <h4 style="font-size: 0.9375rem; font-weight: 700; color: var(--primary); margin-bottom: 0.5rem;">
+          Selected Examination Subjects
+        </h4>
+        <div id="confSubjectsList" style="background: var(--surface-alt); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 0.75rem 1rem; margin-bottom: 1.25rem;">
+          <!-- Populated by JavaScript -->
+        </div>
+
+        <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: var(--radius-md); padding: 1rem; display: flex; justify-content: space-between; align-items: center;">
+          <div>
+            <div style="font-size: 0.8125rem; color: #166534;">Processing Fee Included: <strong id="confProcessingFee">$5.00</strong></div>
+            <div style="font-size: 0.75rem; color: #15803d;">Authentic verification under Danhiko Examination Board</div>
+          </div>
+          <div style="text-align: right;">
+            <span style="font-size: 0.8125rem; color: #166534; display: block;">Total Payable:</span>
+            <span id="confTotalFee" style="font-size: 1.5rem; font-weight: 800; color: #166534;">$0.00</span>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" onclick="closeModal('confirmationModal')">Cancel</button>
+        <button type="button" id="btnConfirmRegistrationFinal" class="btn btn-accent">Confirm Registration</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Modal Fee Receipt Viewer -->
+  <div class="modal-backdrop" id="receiptModal" role="dialog" aria-modal="true" aria-labelledby="receiptModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-header">
+        <h3 id="receiptModalTitle">Official Fee Receipt</h3>
+        <button type="button" class="modal-close-btn" onclick="closeModal('receiptModal')" aria-label="Close modal">&times;</button>
+      </div>
+      <div class="modal-body" style="padding: 1.25rem;">
+        <div id="modalReceiptContainer">
+          <!-- Populated dynamically with full printable receipt -->
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" onclick="closeModal('receiptModal')">Close</button>
+        <button type="button" class="btn btn-primary" onclick="printReceipt()">🖨️ Print Receipt</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Footer -->
+  
+
+  <!-- Portal Footer -->
+  <footer class="main-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h4>DANHIKO INDUSTRIAL TRAINING COLLEGE</h4>
+          <p>
+            Official Examination Registry &amp; Fee Management Portal. Operating under the broader Danhiko Project welfare organization in Harare, Zimbabwe.
+          </p>
+          <div style="font-size: 0.8125rem; color: #94a3b8;">
+            📍 No 123, Mutare Road, Harare, Zimbabwe<br>
+            🏛️ Ministry of Higher and Tertiary Education, Innovation, Science and Technology Development
+          </div>
+        </div>
+
+        <div class="footer-links">
+          <h5>Return to College Pages</h5>
+          <ul class="footer-nav">
+            <li><a href="index.html#home">College Homepage</a></li>
+            <li><a href="index.html#about">About Danhiko</a></li>
+            <li><a href="index.html#programs">Vocational Programs</a></li>
+            <li><a href="index.html#accessibility">Inclusive Education &amp; Accessibility</a></li>
+            <li><a href="index.html#support">Student Welfare &amp; Support</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links">
+          <h5>Examination Portal Quick Links</h5>
+          <ul class="footer-nav">
+            <li><a href="#exam-registration-portal" data-nav-tab="dashboard">Portal Dashboard</a></li>
+            <li><a href="#exam-registration-portal" data-nav-tab="admin">Administrator Hub</a></li>
+            <li><a href="#exam-registration-portal" data-nav-tab="students">Enrolled Candidates</a></li>
+            <li><a href="#exam-registration-portal" data-nav-tab="subjects">Curriculum Modules</a></li>
+            <li><a href="#exam-registration-portal" data-nav-tab="register">Exam Registration</a></li>
+            <li><a href="#contact">Registry Hours &amp; Inquiries</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 Danhiko Industrial Training College. All Rights Reserved. Harare, Zimbabwe.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Pure Vanilla JavaScript Application Logic -->
+  <script src="script.js"></script>
+</body>
+</html>

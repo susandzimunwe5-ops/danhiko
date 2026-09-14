@@ -1,0 +1,6 @@
+{
+  "name": "Danhiko Industrial Training College Exam Registration System",
+  "description": "Comprehensive institutional portal and exam registration management system for Danhiko Industrial Training College in Harare, Zimbabwe.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
